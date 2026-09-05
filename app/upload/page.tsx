@@ -99,6 +99,7 @@ const UploadPage = () => {
           fileInputRef.current.value = "";
         }
         router.push("/");
+        window.location.reload();
 
       }
     } catch (error: any) {
