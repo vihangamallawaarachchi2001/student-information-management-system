@@ -7,6 +7,7 @@ import {
   FileSpreadsheet,
   Upload,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Sheet = {
   id: number;
@@ -16,6 +17,7 @@ type Sheet = {
 const Sidebar = () => {
   const [listItems, setListItems] = useState<Sheet[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchSheets = async () => {
@@ -59,6 +61,7 @@ const Sidebar = () => {
 
         <button
           type="button"
+          onClick={()=> {router.push("/dashboard")}}
           className="mb-1 flex w-full items-center gap-3 rounded-lg bg-slate-100 px-3 py-2.5 text-left text-sm font-medium text-slate-900 transition-colors hover:bg-slate-200"
         >
           <LayoutDashboard className="h-4 w-4 text-slate-600" />
@@ -86,6 +89,7 @@ const Sidebar = () => {
               <button
                 key={item.id}
                 type="button"
+                onClick={()=>{router.push(`/sheets/${item.id.toString()}`)}}
                 className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
               >
                 <FileSpreadsheet className="h-4 w-4 shrink-0 text-slate-400 transition-colors group-hover:text-slate-600" />
@@ -105,6 +109,7 @@ const Sidebar = () => {
 
         <button
           type="button"
+          onClick={()=> {router.push("/upload")}}
           className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900"
         >
           <Upload className="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-700" />

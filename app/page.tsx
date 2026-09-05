@@ -1,8 +1,9 @@
-import Sidebar from "@/components/sidebar";
-import Image from "next/image";
+import React from 'react'
 
-export default function Home() {
+const Page = () => {
   return (
-    <Sidebar />
-  );
+    <div>Page</div>
+  )
 }
+
+export default Page
