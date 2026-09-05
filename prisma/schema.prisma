@@ -9,5 +9,30 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlserver"
+  provider = "mysql"
+}
+
+model Sheet {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(255)
+  originalFilename String?  @db.VarChar(255)
+  metadata         Json?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  rows DataRow[]
+}
+
+model DataRow {
+  id        BigInt   @id @default(autoincrement())
+  sheetId   Int
+  boltonId  String   @db.VarChar(100)
+  data      Json
+  createdAt DateTime @default(now())
+
+  sheet Sheet @relation(fields: [sheetId], references: [id], onDelete: Cascade)
+
+  @@index([sheetId])
+  @@index([boltonId])
+  @@index([sheetId, boltonId])
 }
